@@ -8,7 +8,7 @@
 ##### Dependencies
 1. Redis
 
-##### How It Words
+##### How It Works
 1. go to you gitlab and setup webhook or system hook to push-receiver url
 2. go to jenkins and create job, what receiver is started and add Token for triggered remotly
 3. if you need - you can setup another job for clearing remotely
