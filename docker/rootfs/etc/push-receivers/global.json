@@ -1,0 +1,15 @@
+[{
+  "project": [{
+    "name": "projectName in Gitlab",
+    "job": "JobNameInJenkins",
+    "host": "HostParametersInJenkins(not required)",
+    "removeJob": "JobNameForCleanUp(not required)",
+    "branches": ["master", "test"]
+  },
+  {
+    "name": "projectName in Gitlab",
+    "job": "JobNameInJenkins2",
+    "host": "HostParametersInJenkins(not required)",
+    "removeJob": "JobNameForCleanUp(not required)",
+  }]
+}]

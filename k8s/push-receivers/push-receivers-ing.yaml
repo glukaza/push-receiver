@@ -1,0 +1,16 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: push-receivers
+  namespace: ci
+spec:
+  rules:
+  - host: receiver.k8s.cluster
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: push-receivers
+          servicePort: 80
+

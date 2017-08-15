@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: push-receivers
+  namespace: ci
+data:
+  global.json: |
+    [{
+      "project": [{
+          "name": "nameInGitlab",
+          "job": "JobNameInJenkins",
+          "host": "HostParametersInJenkins(not required)",
+          "removeJob": "JobNameForCleanUp(not required)"
+        }]
+    }]
+

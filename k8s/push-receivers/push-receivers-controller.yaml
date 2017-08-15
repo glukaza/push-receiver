@@ -1,0 +1,88 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: push-receivers
+  namespace: ci
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: push-receivers
+  template:
+    metadata:
+      labels:
+        task: proxy
+        k8s-app: push-receivers
+    spec:
+      containers:
+      - name: push-receivers
+        image: hub.docker.com/gluka/push-receivers:latest
+        ports:
+          - containerPort: 8081
+            protocol: TCP
+        env:
+        - name: PU_JENKINS_URL
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_JENKINS_URL
+        - name: PU_JENKINS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_JENKINS_TOKEN
+        - name: PU_JENKINS_USER
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_JENKINS_USER
+        - name: PU_JENKINS_USER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_JENKINS_USER_TOKEN
+        - name: PU_SKYPE_GITLAB
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_SKYPE_GITLAB
+        - name: PU_SKYPE_GITLAB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_SKYPE_GITLAB_TOKEN
+        - name: PU_REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_REDIS_HOST
+        - name: PU_REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              name: push-receivers
+              key: PU_REDIS_PORT
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/push-receivers
+        resources:
+          requests:
+            cpu: 1m
+            memory: 32Mi
+          limits:
+            cpu: 50m
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 60
+          timeoutSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
+      volumes:
+      - name: config-volume
+        configMap:
+          name: push-receivers

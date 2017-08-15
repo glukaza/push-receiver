@@ -1,0 +1,8 @@
+*.swp
+.idea
+bin/*
+src
+pkg
+*.example
+docker/rootfs/opt/push-receivers
+/push-receivers
