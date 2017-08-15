@@ -19,8 +19,8 @@ all:
 	@echo '   make run'
 
 compile:
-	@git config --global url."git@github.com:".insteadOf "https://github.com/"
-	go get -d -u github.com/glukaza/revicer
+#	@git config --global url."git@github.com:".insteadOf "https://github.com/"
+	go get -d -u github.com/glukaza/push-receiver
 	go build
 
 docker:
